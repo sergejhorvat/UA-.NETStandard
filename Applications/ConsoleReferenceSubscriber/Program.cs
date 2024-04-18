@@ -108,7 +108,8 @@ namespace Quickstarts.ConsoleReferenceSubscriber
                     // set default UDP Subscriber Url to local multicast if not sent in args.
                     if (string.IsNullOrEmpty(subscriberUrl))
                     {
-                        subscriberUrl = "opc.udp://239.0.0.1:4840";
+                        //subscriberUrl = "opc.udp://239.0.0.1:4840";
+                        subscriberUrl = "opc.udp://127.0.0.1:49320"; 
                     }
 
                     // Create configuration using UDP protocol and UADP Encoding
@@ -120,7 +121,7 @@ namespace Quickstarts.ConsoleReferenceSubscriber
                     // set default MQTT Broker Url to localhost if not sent in args.
                     if (string.IsNullOrEmpty(subscriberUrl))
                     {
-                        subscriberUrl = "mqtt://localhost:1883";
+                        subscriberUrl = "mqtt://localhost:49320";
                     }
 
                     if (useMqttUadp)
