@@ -53,7 +53,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
-    <PackageReference Include="BouncyCastle.Cryptography" Version="2.3.0" />
+    <PackageReference Include="BouncyCastle.Cryptography" Version="2.3.1" />
   </ItemGroup>
 
   <Target Name="GetPackagingOutputs" />

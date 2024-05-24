@@ -65,7 +65,7 @@ namespace Quickstarts.ConsoleReferenceClient
             var usage = $"Usage: dotnet {applicationName}.dll [OPTIONS]";
 
             // command line options
-            bool showHelp = false;
+            bool showHelp = false;  // false
             bool autoAccept = false;
             string username = null;
             string userpassword = null;
@@ -114,7 +114,8 @@ namespace Quickstarts.ConsoleReferenceClient
                 var extraArg = ConsoleUtils.ProcessCommandLine(output, args, options, ref showHelp, "REFCLIENT", false);
 
                 // connect Url?
-                Uri serverUrl = new Uri("opc.tcp://localhost:62541/Quickstarts/ReferenceServer");
+                //Uri serverUrl = new Uri("opc.tcp://localhost:62541/Quickstarts/ReferenceServer");
+                Uri serverUrl = new Uri("opc.tcp://localhost:49320");
                 if (!string.IsNullOrEmpty(extraArg))
                 {
                     serverUrl = new Uri(extraArg);
@@ -197,13 +198,19 @@ namespace Quickstarts.ConsoleReferenceClient
 
                     using (UAClient uaClient = new UAClient(application.ApplicationConfiguration, reverseConnectManager, output, ClientBase.ValidateResponse) {
                         AutoAccept = autoAccept,
-                        SessionLifeTime = 60_000,
+                        SessionLifeTime = 600_000, //60_000,
                     })
                     {
                         // set user identity
                         if (!String.IsNullOrEmpty(username))
                         {
-                            uaClient.UserIdentity = new UserIdentity(username, userpassword ?? string.Empty);
+
+                            // Default value
+                            //uaClient.UserIdentity = new UserIdentity(username, userpassword ?? string.Empty);
+
+
+                            // TEST 
+                            uaClient.UserIdentity = new UserIdentity("kpi_lab", "oeeplab_kpi12345");
                         }
 
                         bool connected = await uaClient.ConnectAsync(serverUrl.ToString(), !noSecurity, quitCTS.Token).ConfigureAwait(false);
@@ -252,9 +259,10 @@ namespace Quickstarts.ConsoleReferenceClient
                                 if (subscribe && (browseall || fetchall))
                                 {
                                     // subscribe to 100 random variables
-                                    const int MaxVariables = 100;
+                                    const int MaxVariables = 10; //100
                                     NodeCollection variables = new NodeCollection();
-                                    Random random = new Random(62541);
+                                    //Random random = new Random(62541);
+                                    Random random = new Random(2253);  // Kepware has only 2253 values by default
                                     if (fetchall)
                                     {
                                         variables.AddRange(allNodes
@@ -276,7 +284,7 @@ namespace Quickstarts.ConsoleReferenceClient
 
                                     await samples.SubscribeAllValuesAsync(uaClient,
                                         variableIds: new NodeCollection(variables),
-                                        samplingInterval: 1000,
+                                        samplingInterval: 1000, //1000
                                         publishingInterval: 5000,
                                         queueSize: 10,
                                         lifetimeCount: 12,
@@ -294,16 +302,16 @@ namespace Quickstarts.ConsoleReferenceClient
                             else
                             {
                                 // Run tests for available methods on reference server.
-                                samples.ReadNodes(uaClient.Session);
-                                samples.WriteNodes(uaClient.Session);
-                                samples.Browse(uaClient.Session);
-                                samples.CallMethod(uaClient.Session);
-                                samples.SubscribeToDataChanges(uaClient.Session, 120_000);
+                                //samples.ReadNodes(uaClient.Session);
+                                //samples.WriteNodes(uaClient.Session);
+                                //samples.Browse(uaClient.Session);
+                                //samples.CallMethod(uaClient.Session);
+                                samples.SubscribeToDataChanges(uaClient.Session, 120_000); //120_000
 
                                 output.WriteLine("Waiting...");
 
                                 // Wait for some DataChange notifications from MonitoredItems
-                                quit = quitEvent.WaitOne(timeout > 0 ? waitTime : 30_000);
+                                quit = quitEvent.WaitOne(timeout > 0 ? waitTime : 30_000); //30_000
                             }
 
                             output.WriteLine("Client disconnected.");

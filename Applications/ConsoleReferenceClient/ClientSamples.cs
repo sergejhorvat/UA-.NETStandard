@@ -323,10 +323,10 @@ namespace Quickstarts
 
                 MonitoredItem intMonitoredItem = new MonitoredItem(subscription.DefaultItem);
                 // Int32 Node - Objects\CTT\Scalar\Simulation\Int32
-                intMonitoredItem.StartNodeId = new NodeId("ns=2;s=Scalar_Simulation_Int32");
+                intMonitoredItem.StartNodeId = new NodeId("ns=2;s=Simulation Examples.Functions.Random1");
                 intMonitoredItem.AttributeId = Attributes.Value;
                 intMonitoredItem.DisplayName = "Int32 Variable";
-                intMonitoredItem.SamplingInterval = 1000;
+                intMonitoredItem.SamplingInterval = 1000; //1000
                 intMonitoredItem.QueueSize = 10;
                 intMonitoredItem.DiscardOldest = true;
                 intMonitoredItem.Notification += OnMonitoredItemNotification;
@@ -335,7 +335,7 @@ namespace Quickstarts
 
                 MonitoredItem floatMonitoredItem = new MonitoredItem(subscription.DefaultItem);
                 // Float Node - Objects\CTT\Scalar\Simulation\Float
-                floatMonitoredItem.StartNodeId = new NodeId("ns=2;s=Scalar_Simulation_Float");
+                floatMonitoredItem.StartNodeId = new NodeId("ns=2;s=Simulation Examples.Functions.Random2");
                 floatMonitoredItem.AttributeId = Attributes.Value;
                 floatMonitoredItem.DisplayName = "Float Variable";
                 floatMonitoredItem.SamplingInterval = 1000;
@@ -344,16 +344,16 @@ namespace Quickstarts
 
                 subscription.AddItem(floatMonitoredItem);
 
-                MonitoredItem stringMonitoredItem = new MonitoredItem(subscription.DefaultItem);
-                // String Node - Objects\CTT\Scalar\Simulation\String
-                stringMonitoredItem.StartNodeId = new NodeId("ns=2;s=Scalar_Simulation_String");
-                stringMonitoredItem.AttributeId = Attributes.Value;
-                stringMonitoredItem.DisplayName = "String Variable";
-                stringMonitoredItem.SamplingInterval = 1000;
-                stringMonitoredItem.QueueSize = 10;
-                stringMonitoredItem.Notification += OnMonitoredItemNotification;
+                //MonitoredItem stringMonitoredItem = new MonitoredItem(subscription.DefaultItem);
+                //// String Node - Objects\CTT\Scalar\Simulation\String
+                //stringMonitoredItem.StartNodeId = new NodeId("ns=2;s=Scalar_Simulation_String");
+                //stringMonitoredItem.AttributeId = Attributes.Value;
+                //stringMonitoredItem.DisplayName = "String Variable";
+                //stringMonitoredItem.SamplingInterval = 1000;
+                //stringMonitoredItem.QueueSize = 10;
+                //stringMonitoredItem.Notification += OnMonitoredItemNotification;
 
-                subscription.AddItem(stringMonitoredItem);
+                //subscription.AddItem(stringMonitoredItem);
 
                 // Create the monitored items on Server side
                 subscription.ApplyChanges();
