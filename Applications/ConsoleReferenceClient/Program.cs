@@ -67,11 +67,11 @@ namespace Quickstarts.ConsoleReferenceClient
             // command line options
             bool showHelp = false;  // false
             bool autoAccept = false;
-            string username = null;
-            string userpassword = null;
+            string username = "oeepfb"; //null
+            string userpassword = "oeeplab_kpi12345"; //null
             bool logConsole = false;
             bool appLog = false;
-            bool renewCertificate = false;
+            bool renewCertificate = true;  //false
             bool loadTypes = false;
             bool browseall = false;
             bool fetchall = false;
@@ -206,11 +206,8 @@ namespace Quickstarts.ConsoleReferenceClient
                         {
 
                             // Default value
-                            //uaClient.UserIdentity = new UserIdentity(username, userpassword ?? string.Empty);
+                            uaClient.UserIdentity = new UserIdentity(username, userpassword ?? string.Empty); // //
 
-
-                            // TEST 
-                            uaClient.UserIdentity = new UserIdentity("kpi_lab", "oeeplab_kpi12345");
                         }
 
                         bool connected = await uaClient.ConnectAsync(serverUrl.ToString(), !noSecurity, quitCTS.Token).ConfigureAwait(false);

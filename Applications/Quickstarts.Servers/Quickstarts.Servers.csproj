@@ -3,7 +3,7 @@
   <PropertyGroup>
     <DefineConstants>$(DefineConstants)</DefineConstants>
     <AssemblyName>Quickstarts.Servers</AssemblyName>
-    <TargetFrameworks>$(LibTargetFrameworks)</TargetFrameworks>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <PackageId>OPCFoundation.NetStandard.Opc.Ua.Quickstarts.Servers</PackageId>
     <RootNamespace>Quickstarts.Servers</RootNamespace>
     <Description>OPC UA Quickstarts Servers Class Library</Description>
